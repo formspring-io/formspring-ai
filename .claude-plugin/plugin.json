@@ -3,7 +3,7 @@
   "name": "formspring",
   "displayName": "Formspring",
   "description": "Create and manage Formspring forms, surveys, funnels, links, and automations from Claude Code via the Formspring MCP server.",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "author": {
     "name": "Formspring",
     "url": "https://formspring.io"
@@ -29,7 +29,7 @@
     "formspring_token": {
       "type": "string",
       "title": "Formspring API token",
-      "description": "Bearer token from https://formspring.io/api or the MCP setup wizard",
+      "description": "Bearer token from /formspring:login (device auth), https://formspring.io/mcp/setup, or https://formspring.io/api",
       "sensitive": true,
       "required": true
     }

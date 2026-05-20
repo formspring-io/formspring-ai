@@ -6,31 +6,44 @@ Create forms, surveys, funnels, and short links; triage submissions; audit webho
 
 ## Install
 
-### 1. API token
+### 1. Sign in (device authorization — recommended)
 
-Mint a token with the abilities you need:
+No manual token copy. From this repo:
 
-- **Wizard (recommended):** [formspring.io/mcp/setup](https://formspring.io/mcp/setup) — pick Cursor or Claude Code; copy the token once.
-- **Manual:** [formspring.io/api](https://formspring.io/api)
+```bash
+./scripts/device-auth.sh cursor
+# or: ./scripts/device-auth.sh claude-code
+```
 
-**Cursor:** export `FORMSPRING_TOKEN` in your shell (add to `~/.zshrc` or `~/.bashrc`).
+Opens [formspring.io/mcp/device](https://formspring.io/mcp/device) in your browser; after you approve, the script prints `export FORMSPRING_TOKEN=...`.
 
-**Claude Code:** enter the token when enabling the plugin (`formspring_token`), or export `FORMSPRING_TOKEN`.
+In Claude Code you can also run **`/formspring:login`** (plugin command).
 
-### 2. Claude Code
+**Cursor:** add the export to your shell profile, then reload the window.
+
+**Claude Code:** paste into `formspring_token` plugin settings or export `FORMSPRING_TOKEN`.
+
+Docs: [Device authorization](https://formspring.io/docs/mcp/device-authorization)
+
+### 2. Or mint a token manually
+
+- **Wizard:** [formspring.io/mcp/setup](https://formspring.io/mcp/setup) — browser connect, device approval, or copy/paste config; includes **setup prompts** you can paste into any agent.
+- **API page:** [formspring.io/api](https://formspring.io/api)
+
+### 3. Claude Code
 
 ```text
 /plugin marketplace add https://github.com/formspring-io/formspring-ai
 /plugin install formspring@formspring
 ```
 
-Enable the plugin and complete the `formspring_token` prompt. Run `/mcp` to confirm `formspring` is connected.
+Enable the plugin and complete the `formspring_token` prompt (or run `/formspring:login` first). Run `/mcp` to confirm `formspring` is connected.
 
 **Dev:** `claude --plugin-dir /path/to/formspring-ai` then `/reload-plugins`.
 
-**Slash commands (namespaced):** `/formspring:create-form`, `/formspring:triage-spam`, `/formspring:audit-webhooks`, and others under `/formspring:*`.
+**Slash commands:** `/formspring:login`, `/formspring:verify-setup`, `/formspring:inbox-snapshot`, `/formspring:webhook-health`, `/formspring:triage-spam`, `/formspring:integration-brief`, plus create/audit workflows under `/formspring:*`.
 
-### 3. Cursor
+### 4. Cursor
 
 - **Marketplace:** search **Formspring** in the Cursor marketplace, or
 - **Team marketplace:** Dashboard → Settings → Plugins → Import `https://github.com/formspring-io/formspring-ai`
@@ -40,31 +53,37 @@ Export `FORMSPRING_TOKEN`, then **Settings → MCP** → enable `formspring`.
 
 Skills appear under **Settings → Rules** (Agent Decides). Optional rule: `formspring-product-routing` (Always if you want strict routing).
 
-### 4. Manual MCP only (no plugin)
+### 5. Other agents (OpenClaw, Hermes, VS Code, ChatGPT, …)
+
+Use the same MCP URL and device flow. Install snippets and client keys are on [formspring.io/mcp](https://formspring.io/mcp) and under `resources/docs/mcp/` in the Formspring app repo.
+
+### 6. Manual MCP only (no plugin)
 
 Merge [`mcp.json`](mcp.json) into `.cursor/mcp.json` or `~/.claude.json`. Use only `${env:FORMSPRING_TOKEN}` — never commit a real token.
 
 Claude manual install can use [`.mcp.json`](.mcp.json) with `type: http` at project scope.
 
-### 5. Verify
+### 7. Verify
 
-In chat:
+Run **`/formspring:verify-setup`** in Claude Code, or in chat:
 
 > List my forms.
 
-You should see workspace forms via MCP.
+You should see workspace forms via MCP. For a full connection check (team, plan, sample submissions), use the verify setup command or the first prompt on [formspring.io/mcp/setup](https://formspring.io/mcp/setup).
 
 ## What's included
 
 | Piece | Purpose |
 | --- | --- |
 | `mcp.json` / `.mcp.json` | Remote MCP server + auth |
-| `skills/` | Product routing + templates |
-| `commands/` | Slash workflows (10 commands) |
+| `skills/` | Product routing + templates + setup flow |
+| `commands/` | Slash workflows (login, verify, inbox, webhooks, create, …) |
+| `prompts/` | Setup prompt text (synced with app wizard) |
 | `agents/` | Triage, webhooks, funnels, form drafting |
 | `rules/` | Cursor product-routing rule (`.mdc`) |
+| `scripts/device-auth.sh` | Browser sign-in for plugins |
 
-Server capabilities (74 tools, resources, prompts): [formspring.io/docs/mcp](https://formspring.io/docs/mcp)
+Server capabilities (tools, resources, prompts): [formspring.io/docs/mcp](https://formspring.io/docs/mcp)
 
 ## Development
 

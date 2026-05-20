@@ -1,16 +1,18 @@
 ---
 name: formspring
-description: Use when working with Formspring (formspring.io) — creating forms, surveys, funnels, short links, automations, triaging submissions, webhooks, or AI insights via MCP. Triggers on Formspring, MCP formspring server, create form/survey/funnel from chat, list submissions, publish form.
+description: Use when working with Formspring (formspring.io) — creating forms, surveys, funnels, short links, automations, triaging submissions, webhooks, or AI insights via MCP. Triggers on Formspring, MCP formspring server, create form/survey/funnel from chat, list submissions, publish form, device login, verify MCP setup.
 ---
 
 # Formspring agent skill
 
 ## Prerequisites
 
-1. MCP server `formspring` is connected (this plugin wires `https://formspring.io/mcp-server`).
-2. API token is configured: `FORMSPRING_TOKEN` in the environment (Cursor), plugin `formspring_token` (Claude Code), or the [MCP setup wizard](https://formspring.io/mcp/setup).
+1. MCP server `formspring` is connected (`https://formspring.io/mcp-server`).
+2. API token is configured:
+   - **Recommended:** device authorization — `/formspring:login` (Claude Code) or `./scripts/device-auth.sh cursor|claude-code` from this plugin repo.
+   - **Manual:** [MCP setup wizard](https://formspring.io/mcp/setup) or `FORMSPRING_TOKEN` / Claude `formspring_token`.
 
-Verify: ask the user to run a session and call `list_forms`, or use `/mcp` in Claude Code.
+After login, run **`/formspring:verify-setup`** (or the verify prompt from the setup wizard) to confirm tools and list a sample inbox.
 
 ## Product routing (never mix tools)
 
@@ -20,6 +22,18 @@ Verify: ask the user to run a session and call `list_forms`, or use `/mcp` in Cl
 | Multi-screen survey, quiz, NPS | `create_survey` | `create_form` |
 | Multi-step funnel, quiz funnel, lead gen | `create_funnel` | `create_form` |
 | Short link / QR | `create_link` | — |
+
+## Setup prompts (slash commands)
+
+| Goal | Command |
+| --- | --- |
+| Confirm MCP + workspace snapshot | `/formspring:verify-setup` |
+| 7-day inbox on busiest form | `/formspring:inbox-snapshot` |
+| Webhook delivery audit | `/formspring:webhook-health` |
+| Spam triage + rule proposals | `/formspring:triage-spam` |
+| Framework catalog + go-live checklist | `/formspring:integration-brief` |
+
+Source copies: `prompts/` in this repo (synced with app `SetupPrompts`).
 
 ## Create from a starter template
 
@@ -45,6 +59,8 @@ Add when the user needs writes or Pro+ products:
 
 Avoid `tokens:write` unless the user explicitly needs to mint tokens via MCP.
 
+Device authorization and the setup wizard mint tokens with dashboard-safe defaults (all abilities except `tokens:write`).
+
 ## Plan visibility
 
 On **Free**, `tools/list` omits survey, funnel, webhook, and AI tools. `list_templates` for `survey` or `funnel` returns a plan error. Explain upgrade; do not guess paid tools exist.
@@ -57,6 +73,11 @@ Return URLs and next steps from tool JSON (`public_url`, `edit_url`, `next_step`
 
 Prefer server prompts when the client exposes them: `draft-form`, `draft-survey`, `triage-spam`, `audit-webhooks`, `funnel-conversion-review`, `link-traffic-snapshot`, `automation-failure-audit`.
 
+## Other clients
+
+Install guides for OpenClaw, Hermes, VS Code, ChatGPT, and others: [formspring.io/mcp](https://formspring.io/mcp). This plugin targets **Cursor** and **Claude Code**; other clients use the same MCP URL and device flow with matching `client` keys.
+
 ## Reference
 
-Full tool catalogue: https://formspring.io/docs/mcp/tools
+- Tool catalogue: https://formspring.io/docs/mcp/tools
+- Device authorization: https://formspring.io/docs/mcp/device-authorization

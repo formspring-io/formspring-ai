@@ -26,3 +26,41 @@ jobs:
           else
             echo "Claude Code CLI not on runner; run 'claude plugin validate . --strict' locally before release."
           fi
+
+  prompt-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup prompt files are present
+        run: |
+          set -euo pipefail
+          for f in verify.md inbox.md webhooks.md triage-spam-setup.md integrations.md; do
+            test -s "prompts/${f}"
+          done
+          grep -q 'list_forms' prompts/verify.md
+          grep -q 'folder: "spam"' prompts/triage-spam-setup.md
+          grep -q 'get_framework_integration_catalog' prompts/integrations.md
+
+  prompt-sync:
+    runs-on: ubuntu-latest
+    if: ${{ vars.PIXEL_FORMS_REPO != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.PIXEL_FORMS_REPO }}
+          path: pixel-forms
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          tools: composer
+      - name: Install app dependencies
+        working-directory: pixel-forms
+        run: composer install --no-interaction --prefer-dist --no-dev
+      - name: Compare prompts with SetupPrompts.php
+        env:
+          PIXEL_FORMS_PATH: ${{ github.workspace }}/pixel-forms
+        run: |
+          chmod +x scripts/check-setup-prompts-sync.sh
+          ./scripts/check-setup-prompts-sync.sh

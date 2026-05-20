@@ -13,52 +13,56 @@ Mint a token with the abilities you need:
 - **Wizard (recommended):** [formspring.io/mcp/setup](https://formspring.io/mcp/setup) — pick Cursor or Claude Code; copy the token once.
 - **Manual:** [formspring.io/api](https://formspring.io/api)
 
-Export it:
+**Cursor:** export `FORMSPRING_TOKEN` in your shell (add to `~/.zshrc` or `~/.bashrc`).
 
-```bash
-# Paste the token value from the dashboard (shown once)
-export FORMSPRING_TOKEN='…'
+**Claude Code:** enter the token when enabling the plugin (`formspring_token`), or export `FORMSPRING_TOKEN`.
+
+### 2. Claude Code
+
+```text
+/plugin marketplace add https://github.com/formspring-io/formspring-ai
+/plugin install formspring@formspring
 ```
 
-Add that line to your shell profile (`~/.zshrc`, `~/.bashrc`) for persistence.
+Enable the plugin and complete the `formspring_token` prompt. Run `/mcp` to confirm `formspring` is connected.
 
-### 2. Plugin
+**Dev:** `claude --plugin-dir /path/to/formspring-ai` then `/reload-plugins`.
 
-Clone the plugin repo (canonical remote):
+**Slash commands (namespaced):** `/formspring:create-form`, `/formspring:triage-spam`, `/formspring:audit-webhooks`, and others under `/formspring:*`.
 
-```bash
-git clone https://github.com/formspring-io/formspring-ai.git
-```
+### 3. Cursor
 
-**Cursor:** Install from the Cursor plugin marketplace (search **Formspring**), or add the cloned repo as a local plugin.
+- **Marketplace:** search **Formspring** in the Cursor marketplace, or
+- **Team marketplace:** Dashboard → Settings → Plugins → Import `https://github.com/formspring-io/formspring-ai`
+- **Local dev:** symlink this repo to `~/.cursor/plugins/local/formspring` and reload the window.
 
-**Claude Code:** Install the plugin from the Claude plugin directory, or:
+Export `FORMSPRING_TOKEN`, then **Settings → MCP** → enable `formspring`.
 
-```bash
-claude plugin install formspring
-```
+Skills appear under **Settings → Rules** (Agent Decides). Optional rule: `formspring-product-routing` (Always if you want strict routing).
 
-(Use the marketplace entry once published; until then, point Claude at this repository per [Claude Code plugin docs](https://docs.anthropic.com/en/docs/claude-code/plugins).)
+### 4. Manual MCP only (no plugin)
 
-### 3. MCP config (fallback)
+Merge [`mcp.json`](mcp.json) into `.cursor/mcp.json` or `~/.claude.json`. Use only `${env:FORMSPRING_TOKEN}` — never commit a real token.
 
-If you are not using the plugin bundle, merge [`mcp.json`](mcp.json) into `.cursor/mcp.json` or `~/.claude.json`. Never commit a real token — only `${env:FORMSPRING_TOKEN}`.
+Claude manual install can use [`.mcp.json`](.mcp.json) with `type: http` at project scope.
 
-### 4. Verify
+### 5. Verify
 
-In your agent chat:
+In chat:
 
 > List my forms.
 
-You should see workspace forms returned via MCP.
+You should see workspace forms via MCP.
 
 ## What's included
 
 | Piece | Purpose |
 | --- | --- |
-| `mcp.json` | Remote MCP server + env-based auth |
-| `skills/formspring/` | Product routing, templates, plan gates |
-| `commands/` | Slash workflows: create-form, triage-spam, … |
+| `mcp.json` / `.mcp.json` | Remote MCP server + auth |
+| `skills/` | Product routing + templates |
+| `commands/` | Slash workflows (10 commands) |
+| `agents/` | Triage, webhooks, funnels, form drafting |
+| `rules/` | Cursor product-routing rule (`.mdc`) |
 
 Server capabilities (74 tools, resources, prompts): [formspring.io/docs/mcp](https://formspring.io/docs/mcp)
 
@@ -67,9 +71,11 @@ Server capabilities (74 tools, resources, prompts): [formspring.io/docs/mcp](htt
 This repository contains **no application code** — only agent packaging. The MCP server runs on Formspring infrastructure.
 
 ```bash
-# Ensure no secrets are committed
 ./scripts/check-no-secrets.sh
+claude plugin validate . --strict   # when Claude Code CLI is installed
 ```
+
+See [PUBLISHING.md](PUBLISHING.md) for marketplace submission checklists.
 
 ## License
 

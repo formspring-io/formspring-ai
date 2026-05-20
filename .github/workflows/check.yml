@@ -13,3 +13,16 @@ jobs:
         run: |
           chmod +x scripts/check-no-secrets.sh
           ./scripts/check-no-secrets.sh
+
+  validate-plugin:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Claude plugin manifest
+        run: |
+          if command -v claude >/dev/null 2>&1; then
+            claude plugin validate . --strict
+          else
+            echo "Claude Code CLI not on runner; run 'claude plugin validate . --strict' locally before release."
+          fi

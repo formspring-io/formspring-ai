@@ -1,45 +1,55 @@
 # Publishing checklist
 
-Use this after the repository is pushed to `https://github.com/formspring-io/formspring-ai.git`.
-
-```bash
-git remote add origin https://github.com/formspring-io/formspring-ai.git
-git push -u origin main
-```
+Repository: `https://github.com/formspring-io/formspring-ai.git`
 
 ## Pre-flight
 
-- [ ] Run `./scripts/check-no-secrets.sh`
-- [ ] Tag release `v1.0.0`
+- [ ] `./scripts/check-no-secrets.sh`
+- [ ] `claude plugin validate . --strict` (Claude Code CLI installed)
 - [ ] Confirm `mcp.json` uses only `${env:FORMSPRING_TOKEN}`
+- [ ] Confirm `.mcp.json` uses only `${user_config.formspring_token}`
+- [ ] Tag release `v1.1.0` and push `main`
+
+## Claude Code
+
+1. `/plugin marketplace add https://github.com/formspring-io/formspring-ai`
+2. `/plugin install formspring@formspring`
+3. Smoke:
+   - `/mcp` → `formspring` connected
+   - `/formspring:create-form` or *List my forms.*
+   - `list_templates` with `product: form`
+4. Submit: [claude.ai/settings/plugins/submit](https://claude.ai/settings/plugins/submit)
 
 ## Cursor marketplace
 
-1. Open Cursor → Settings → Plugins → submit or link the GitHub repository.
-2. Ensure `.cursor-plugin/plugin.json` validates (name, version, skills, commands, logo path).
-3. Smoke test after install:
-   - `FORMSPRING_TOKEN` exported
-   - Settings → MCP → `formspring` enabled
-   - Chat: *List my forms.*
+1. [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) — link this GitHub repo (open source, manual review).
+2. Local test:
 
-## Claude Code plugin directory
+   ```bash
+   ln -sf "$(pwd)" ~/.cursor/plugins/local/formspring
+   ```
 
-1. Follow Anthropic’s current plugin submission process for `.claude-plugin/plugin.json`.
-2. Confirm `mcpServers.formspring` appears in `/mcp` after plugin install.
-3. Smoke: *List my forms.*
+   Reload Cursor; **Settings → MCP** → `formspring` on.
+
+3. Smoke: *List my forms.* and `list_templates` with `product: form`.
+
+## Team marketplaces
+
+Import `https://github.com/formspring-io/formspring-ai` in **Dashboard → Settings → Plugins → Team Marketplaces** (Teams / Enterprise).
 
 ## Formspring product links
 
-Update after publication:
+After publication, ensure these reference the plugin repo:
 
-- [formspring.io/mcp](https://formspring.io/mcp) — marketplace install buttons
-- Docs: `install-cursor.md`, `install-claude-code.md` — plugin-first install path
-- Dashboard `/mcp/setup` success card — link to this repo
+- [formspring.io/mcp](https://formspring.io/mcp)
+- Docs: `/docs/mcp/install-cursor`, `/docs/mcp/install-claude-code`
+- Dashboard `/mcp/setup` success card
 
 ## Verification prompts
 
 | Prompt | Expect |
 | --- | --- |
 | List my forms. | Non-empty or empty list JSON |
-| list_templates product form | ≥15 template keys |
-| Create contact form from template contact | `create_form` + publish optional |
+| list_templates product form | Template keys returned |
+| Create contact form from template contact | `create_form` succeeds |
+| Audit my webhooks | Delivery summary (Pro+) |

@@ -1,6 +1,11 @@
+---
+description: Triage Formspring spam submissions and propose custom_rules fixes.
+disable-model-invocation: true
+---
+
 # Triage Formspring spam
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; `submissions:read` and `submissions:write`.
+Prerequisites: MCP `formspring` connected; `submissions:read` and `submissions:write`.
 
 ## Steps
 

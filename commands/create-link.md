@@ -1,6 +1,11 @@
+---
+description: Create a Formspring branded short link or QR destination.
+disable-model-invocation: true
+---
+
 # Create a Formspring short link
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; token has `links:read` and `links:write`.
+Prerequisites: MCP `formspring` connected; token has `links:read` and `links:write`.
 
 ## Steps
 

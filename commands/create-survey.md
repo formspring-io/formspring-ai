@@ -1,6 +1,11 @@
+---
+description: Create a Formspring multi-screen survey or quiz (Pro+).
+disable-model-invocation: true
+---
+
 # Create a Formspring survey
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; **Pro+** plan; token has `surveys:read` and `surveys:write`.
+Prerequisites: MCP `formspring` connected; **Pro+** plan; token has `surveys:read` and `surveys:write`.
 
 ## Steps
 

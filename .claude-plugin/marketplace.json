@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "formspring",
+  "description": "Official Formspring agent plugins for Claude Code — MCP, skills, commands, and agents.",
+  "owner": {
+    "name": "Formspring",
+    "url": "https://formspring.io"
+  },
+  "plugins": [
+    {
+      "name": "formspring",
+      "source": "./",
+      "description": "Create and manage Formspring forms, surveys, funnels, links, and automations via MCP.",
+      "version": "1.1.0",
+      "homepage": "https://formspring.io/mcp",
+      "repository": "https://github.com/formspring-io/formspring-ai"
+    }
+  ]
+}

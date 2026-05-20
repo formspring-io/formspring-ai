@@ -8,7 +8,7 @@ description: Use when working with Formspring (formspring.io) — creating forms
 ## Prerequisites
 
 1. MCP server `formspring` is connected (this plugin wires `https://formspring.io/mcp-server`).
-2. `FORMSPRING_TOKEN` is set in the environment (Bearer API token from [API tokens](https://formspring.io/api) or the [MCP setup wizard](https://formspring.io/mcp/setup)).
+2. API token is configured: `FORMSPRING_TOKEN` in the environment (Cursor), plugin `formspring_token` (Claude Code), or the [MCP setup wizard](https://formspring.io/mcp/setup).
 
 Verify: ask the user to run a session and call `list_forms`, or use `/mcp` in Claude Code.
 

@@ -1,6 +1,11 @@
+---
+description: Create a Formspring contact form, optionally from a template.
+disable-model-invocation: true
+---
+
 # Create a Formspring form
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; token has `forms:read` and `forms:write`.
+Prerequisites: MCP `formspring` connected; token has `forms:read` and `forms:write`.
 
 ## Steps
 

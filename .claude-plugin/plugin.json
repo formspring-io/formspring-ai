@@ -1,7 +1,9 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "formspring",
+  "displayName": "Formspring",
   "description": "Create and manage Formspring forms, surveys, funnels, links, and automations from Claude Code via the Formspring MCP server.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Formspring",
     "url": "https://formspring.io"
@@ -19,15 +21,18 @@
     "lead-gen",
     "submissions"
   ],
-  "mcpServers": {
-    "formspring": {
-      "type": "http",
-      "url": "https://formspring.io/mcp-server",
-      "headers": {
-        "Authorization": "Bearer ${env:FORMSPRING_TOKEN}"
-      }
-    }
-  },
+  "mcpServers": "./.mcp.json",
   "skills": "./skills/",
-  "commands": "./commands/"
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "hooks": "./hooks/hooks.json",
+  "userConfig": {
+    "formspring_token": {
+      "type": "string",
+      "title": "Formspring API token",
+      "description": "Bearer token from https://formspring.io/api or the MCP setup wizard",
+      "sensitive": true,
+      "required": true
+    }
+  }
 }

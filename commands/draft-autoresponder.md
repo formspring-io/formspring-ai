@@ -1,6 +1,11 @@
+---
+description: Draft and test a Formspring form autoresponder before saving.
+disable-model-invocation: true
+---
+
 # Draft and test a Formspring autoresponder
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; `forms:read`, `forms:write`, `forms:test-email`.
+Prerequisites: MCP `formspring` connected; `forms:read`, `forms:write`, `forms:test-email`.
 
 ## Steps
 

@@ -1,6 +1,11 @@
+---
+description: Summarize Formspring form activity and insights for the past week.
+disable-model-invocation: true
+---
+
 # Formspring weekly digest brief
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; `forms:read`, `submissions:read`, `insights:read` (insights Pro+).
+Prerequisites: MCP `formspring` connected; `forms:read`, `submissions:read`, `insights:read` (insights Pro+).
 
 ## Steps
 

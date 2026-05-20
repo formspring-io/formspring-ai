@@ -1,0 +1,19 @@
+---
+description: Formspring MCP product routing — use the correct create_* tool and respect plan gates.
+alwaysApply: false
+---
+
+# Formspring product routing
+
+When the Formspring MCP server is connected:
+
+| User wants | MCP tool | Do not use |
+| --- | --- | --- |
+| Contact / lead form (one screen) | `create_form` | `create_survey`, `create_funnel` |
+| Multi-screen survey, quiz, NPS | `create_survey` | `create_form` |
+| Multi-step funnel, quiz funnel | `create_funnel` | `create_form` |
+| Short link / QR | `create_link` | — |
+
+- Discover starters with `list_templates` (`product`: `form`, `survey`, or `funnel`).
+- On **Free** plans, survey/funnel/webhook/AI tools may be hidden — explain Pro+ instead of inventing tools.
+- Customer-facing copy: say **Formspring** only; do not expose internal stack or codenames.

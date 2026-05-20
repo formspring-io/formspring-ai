@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "formspring": {
+      "type": "http",
+      "url": "https://formspring.io/mcp-server",
+      "headers": {
+        "Authorization": "Bearer ${user_config.formspring_token}"
+      }
+    }
+  }
+}

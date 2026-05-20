@@ -1,12 +1,20 @@
-# Formspring AI plugins
+# Formspring agent plugins
 
-This repo packages the Formspring MCP integration for Cursor and Claude Code.
+Packaging-only repo for Cursor and Claude Code. The hosted MCP server lives at `https://formspring.io/mcp-server`.
 
-Canonical remote: `https://github.com/formspring-io/formspring-ai.git`
+## Layout
 
-- MCP endpoint: `https://formspring.io/mcp-server`
-- Auth: `Authorization: Bearer $FORMSPRING_TOKEN`
-- Do not commit API tokens or paste Bearer literals into JSON files.
-- Tool names and behaviour: https://formspring.io/docs/mcp/tools
+- `.claude-plugin/` — Claude manifest + marketplace catalog
+- `.cursor-plugin/` — Cursor manifest + marketplace catalog
+- `skills/`, `commands/`, `agents/`, `hooks/`, `rules/` — shared components at repo root
+- `mcp.json` — Cursor / env auth
+- `.mcp.json` — Claude / HTTP + `user_config.formspring_token`
 
-When editing commands or skills, keep product routing strict: forms ≠ surveys ≠ funnels.
+## Checks before push
+
+```bash
+./scripts/check-no-secrets.sh
+claude plugin validate . --strict
+```
+
+Never commit API tokens. Use `${env:FORMSPRING_TOKEN}` or `${user_config.formspring_token}` only.

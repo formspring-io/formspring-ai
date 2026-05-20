@@ -1,6 +1,11 @@
+---
+description: Audit Formspring webhook deliveries and recommend fixes (Pro+).
+disable-model-invocation: true
+---
+
 # Audit Formspring webhooks
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; **Pro+** for webhooks; `webhooks:read`.
+Prerequisites: MCP `formspring` connected; **Pro+** for webhooks; `webhooks:read`.
 
 ## Steps
 

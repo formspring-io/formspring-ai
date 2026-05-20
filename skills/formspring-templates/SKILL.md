@@ -1,6 +1,6 @@
 ---
 name: formspring-templates
-description: Formspring template discovery and create-from-template flow via list_templates and create_* tools.
+description: Formspring template discovery and create-from-template flow via list_templates and create_* tools. Use when the user wants a starter template, gallery pick, NPS/contact template, or funnel template key.
 ---
 
 # Formspring templates

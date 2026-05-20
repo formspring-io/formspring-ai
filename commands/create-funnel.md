@@ -1,6 +1,11 @@
+---
+description: Create a Formspring funnel from a template or blank (Pro+).
+disable-model-invocation: true
+---
+
 # Create a Formspring funnel
 
-Prerequisites: `FORMSPRING_TOKEN` set; MCP `formspring` connected; **Pro+** plan; token has `funnels:read` and `funnels:write`.
+Prerequisites: MCP `formspring` connected; **Pro+** plan; token has `funnels:read` and `funnels:write`.
 
 ## Steps
 

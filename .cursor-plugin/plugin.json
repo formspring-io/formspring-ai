@@ -1,0 +1,25 @@
+{
+  "name": "formspring",
+  "displayName": "Formspring",
+  "description": "Create and manage Formspring forms, surveys, funnels, links, and automations from Cursor via the Formspring MCP server.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Formspring",
+    "url": "https://formspring.io"
+  },
+  "homepage": "https://formspring.io/mcp",
+  "repository": "https://github.com/formspring-io/formspring-ai.git",
+  "license": "MIT",
+  "keywords": [
+    "formspring",
+    "forms",
+    "surveys",
+    "funnels",
+    "mcp",
+    "lead-gen",
+    "submissions"
+  ],
+  "logo": "assets/logo.png",
+  "skills": "./skills/",
+  "commands": "./commands/"
+}

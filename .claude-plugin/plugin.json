@@ -1,0 +1,33 @@
+{
+  "name": "formspring",
+  "description": "Create and manage Formspring forms, surveys, funnels, links, and automations from Claude Code via the Formspring MCP server.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Formspring",
+    "url": "https://formspring.io"
+  },
+  "homepage": "https://formspring.io/mcp",
+  "logo": "assets/logo.png",
+  "repository": "https://github.com/formspring-io/formspring-ai.git",
+  "license": "MIT",
+  "keywords": [
+    "formspring",
+    "forms",
+    "surveys",
+    "funnels",
+    "mcp",
+    "lead-gen",
+    "submissions"
+  ],
+  "mcpServers": {
+    "formspring": {
+      "type": "http",
+      "url": "https://formspring.io/mcp-server",
+      "headers": {
+        "Authorization": "Bearer ${env:FORMSPRING_TOKEN}"
+      }
+    }
+  },
+  "skills": "./skills/",
+  "commands": "./commands/"
+}

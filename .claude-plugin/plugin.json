@@ -3,13 +3,13 @@
   "name": "formspring",
   "displayName": "Formspring",
   "description": "Create and manage Formspring forms, surveys, funnels, links, and automations from Claude Code via the Formspring MCP server.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": {
     "name": "Formspring",
     "url": "https://formspring.io"
   },
   "homepage": "https://formspring.io/mcp",
-  "logo": "assets/logo.png",
+  "privacyPolicyUrl": "https://formspring.io/privacy",
   "repository": "https://github.com/formspring-io/formspring-ai.git",
   "license": "MIT",
   "keywords": [

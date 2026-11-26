@@ -96,6 +96,10 @@ claude plugin validate . --strict   # when Claude Code CLI is installed
 
 See [PUBLISHING.md](PUBLISHING.md) for marketplace submission checklists.
 
+## Privacy
+
+Privacy policy: [formspring.io/privacy](https://formspring.io/privacy)
+
 ## License
 
 MIT — see [LICENSE](LICENSE).

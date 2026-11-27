@@ -28,7 +28,7 @@ Docs: [Device authorization](https://formspring.io/docs/mcp/device-authorization
 ### 2. Or mint a token manually
 
 - **Wizard:** [formspring.io/mcp/setup](https://formspring.io/mcp/setup) — browser connect, device approval, or copy/paste config; includes **setup prompts** you can paste into any agent.
-- **API page:** [formspring.io/api](https://formspring.io/api)
+- **API tokens page:** [formspring.io/user/api-tokens](https://formspring.io/user/api-tokens)
 
 ### 3. Claude Code
 
@@ -83,7 +83,7 @@ You should see workspace forms via MCP. For a full connection check (team, plan,
 | `rules/` | Cursor product-routing rule (`.mdc`) |
 | `scripts/device-auth.sh` | Browser sign-in for plugins |
 
-Server capabilities (tools, resources, prompts): [formspring.io/docs/mcp](https://formspring.io/docs/mcp)
+Server capabilities (tools, resources, prompts): [formspring.io/docs/mcp/overview](https://formspring.io/docs/mcp/overview)
 
 ## Development
 

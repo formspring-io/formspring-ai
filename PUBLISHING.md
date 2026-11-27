@@ -9,7 +9,7 @@ Repository: `https://github.com/formspring-io/formspring-ai.git`
 - [ ] `claude plugin validate . --strict` (Claude Code CLI installed)
 - [ ] Confirm `mcp.json` uses only `${env:FORMSPRING_TOKEN}`
 - [ ] Confirm `.mcp.json` uses only `${user_config.formspring_token}`
-- [ ] Tag release `v1.2.1` and push `main`
+- [ ] Tag release `v1.2.2` and push `main`
 
 ## Claude Code
 

@@ -2,7 +2,7 @@
   "name": "formspring",
   "displayName": "Formspring",
   "description": "Create and manage Formspring forms, surveys, funnels, links, and automations from Cursor via the Formspring MCP server.",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": {
     "name": "Formspring",
     "url": "https://formspring.io"
